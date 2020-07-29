@@ -1,0 +1,714 @@
+<html>
+	<head>
+			<link rel="stylesheet" href="http://s-nego.000webhostapp.com/bootstrap/css/bootstrap.css" type="text/css">
+		<style>
+			.select{
+				font-family:'Courier New', Courier, monospace;
+			}
+			.menu{
+				list-style:none; 
+				border:1px solid #c0c0c0; 
+				float:left; 
+			}
+			.menu li{
+				position:relative; 
+				float:left; 
+				border-right:1px solid #c0c0c0; 
+			}
+			.menu li a{color:#333; text-decoration:none; padding:5px 10px; display:block;}
+			 
+			.menu li a:hover{
+				background:#333; 
+				color:#fff; 
+				-moz-box-shadow:0 3px 10px 0 #CCC; 
+				-webkit-box-shadow:0 3px 10px 0 #ccc; 
+				text-shadow:0px 0px 5px #fff; 
+			}
+			
+			.menu li  ul{
+				position:absolute; 
+				top:25px; 
+				left:0;
+				background-color:#fff; 
+				display:none;
+			} 
+			
+			.menu li:hover ul, .menu li.over ul{display:block;}
+
+			.menu li ul li{
+				border:1px solid #c0c0c0; 
+				display:block; 
+				width:150px;
+			}
+		</style>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://s-nego.000webhostapp.com/bootstrap/js/bootstrap.js"></script>
+		<script>
+
+			function busca(e){
+				if(e.keyCode == 13 || e == 13)
+				{
+					find($("#txtSearch").val());
+					$("#txtSearch").focus();
+				}
+			}
+
+		</script>
+
+	</head>
+	<body>
+		<div class="panel">
+			<div class="row" style="position: fixed; z-index: 9; background-color: #FFF;">
+				<div class="col-md-8">
+					<ul class="Menu">
+						<li><a href="#Tratta">Tratta</a></li>
+						<li><a href="#OT_CAP">OT CAP</a></li>
+						<li><a href="#CIS">CIS</a></li>
+						<li><a href="#CDA">CDA</a></li>
+						<li><a href="#Planta">Planta</a></li>
+						<li><a href="#Workplace">Workplace</a></li>
+						<li><a href="#Transito">Transito</a></li>
+						<li><a href="#Mensagens">Mensagens</a></li>
+						<li><a href="#AF_Desenho">Area Fisica/Desenho</a></li>
+						<li><a href="#MIP">Mip users</a></li>
+						<li><a href="#Consultas_diversas">Consultas diversas</a>
+							<ul>
+								<li><a href="#localizacao">localização da Workplace</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<div class="input-group">
+						<input type="text" class="form-control" name="txtSearch" id="txtSearch" placeholder="Search" onkeypress="busca(event);"  />
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default" aria-label="Left Align" onclick="busca(13);">
+								S
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<div style="width: 100%; text-align: center;"><h1>UTE Digital</h1></div>
+		
+		<div class="container">
+			<section id="Tratta">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Tratta</H2>
+						<ol>
+							<li>A_WipTratte
+								<ul>
+									<li>Cadastro de tipos de tratta ou cadastro de tipos de Fila.</li>
+									<li>Exemplo: (Possui 16 tratta)</li>
+									<li class="select">Select * from A_WipTratte</li>
+								</ul>
+							</li>
+							<br/>
+							<li>T_WIPTratta 
+								<ul>
+									<li>Cadastro da Fila formada por CIS por tipo de tratta.</li>
+									<li>Exemplo: (idtratta corresponde ao código da tabela A_WipTratte)</li>
+									<li class="select">select top 25 * from T_WIPTratta where idtratta in (13)</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="OT_CAP">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>OT CAP</H2>
+						<ol>
+							<li>A_TraguardiPoint
+								<ul>
+									<li>Cadastro os Points onde os carros dão trânsito para entrar ou sair de algum galpão. Na tabela t_cis está presente com o IdTragPoint.</li>
+									<li>Exemplo: (Linha 9 significa transito virtual)</li>
+									<li class="select">select top 100 * from A_TraguardiPoint where Linea = 9</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="CIS">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>CIS</H2>
+						<ol>
+							<li>T_CIS
+								<ul>
+									<li>Cadastro de CIS (código do carro) e suas informações primárias, 
+									pois, esse registo é inserido no Point A (Funilaria) e ainda não tem informações que entrarão ao longo do processo.</li>
+									<li>Exemplo: (filtro por cis específico)</li>
+									<li class="select">select top 25 * from T_CIS where cis like '7802797'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>T_CaratteristicheCIS 
+								<ul>
+									<li>Cadastro das características do CIS (código do carro), algumas informações que foram inseridas ao longo do processo.</li>
+									<li>Exemplo: (filtro por cis específico)</li>
+									<li class="select">select top 25 * from T_CaratteristicheCIS where cis like '7802797'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>T_CaratteristicheDisCis 
+								<ul>
+									<li>Cadastro das características das peçar por CIS (código do carro), nela também contém a área física pelo desenho.</li>
+									<li>Exemplo: (filtro por cis específico)</li>
+									<li class="select">select top 25 * from T_CaratteristicheDisCis where cis like '7802797'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>V_ECTP 
+								<ul>
+									<li>Uma VIEW com uma concatenação de algumas informações importantes sobre o CIS (código do carro), 
+									apenas conseguirá as informações depois que o CIS entrar no Point D (Montagem).</li>
+									<li>Exemplo: (filtro por cis específico)</li>
+									<li class="select">select top 25 * from V_ECTP where cis like '7802797'</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="CDA">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Condição de Aplicação</H2>
+						<ol>
+							<li>REG_CDA
+								<ul>
+									<li>Cadastro dos registros CDA (Condição de aplicação), os registros da coluna ‘CDA_Expression’ indicam: de forma parecida com uma estrutura do “where” de banco de dados, 
+									na estação quais CIS executarão ou não a atividade inerente na estação. os registros da coluna ‘CDA_JSON’ sintetizam a busca em Json,</li>
+									<li>Exemplo: (Busca por todos as condições que possui o código 358 [código do Argo])</li>
+									<li class="select">select top 25 * from REG_CDA where CDA_Expression like '%358%'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_CDA 
+								<ul>
+									<li>Uma View da tabela REG_CDA, cadastro das CDA (Condição de aplicação), os registros da coluna `SqlWhere` indicam, 
+									de forma parecida com uma estrutura do “where” de banco de dados, na estação quais CIS executarão ou não a atividade inerente na estação.</li>
+									<li>Exemplo: (Busca por todos as condições que possui o código 358 [código do Argo])</li>
+									<li class="select">select top 25 * from REG_CDA where CDA_Expression like '%358%'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>D_Esiti_CDA  
+								<ul>
+									<li>Essa tabela possui registros vinculados aos CIS (código do carro) e as CDA’s. 
+									Os registros indicam um êxito na coluna `SqlWhere` da tabela A_CDA com as informações do CIS. 
+									Caso em um registro da coluna `SqlWhere` possui a seguinte informação “Modelo = 358”, portanto, 
+									o CIS que tem em seu registro como modelo 358, na coluna êxito será 1, e o CIS que não tem em seu registro como modelo 358, 
+									na coluna êxito será 0.</li>
+									<li>Exemplo: (Busca por todos registros de êxito ou não das CDA’s pelo CIS)</li>
+									<li class="select">select top 25 * from D_Esiti_CDA where cis like '7740305'</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="Planta">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Planta FIASA (Configuração da Planta)</H2>
+						<ol>
+							<li>A_Unita
+								<ul>
+									<li>Cadastro das Unidade de Linhas da Planta.</li>
+									<li>Exemplo: (8 registros: Funilaria, Pintura, Montagem, etc)</li>
+									<li class="select">select top 25 * from A_Unita</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_Tratti
+								<ul>
+									<li>Cadastro dos Trechos de cada Unidade de linha.</li>
+									<li>Exemplo: (todos os trechos da unidade de código 3)</li>
+									<li class="select">select top 25 * from A_Tratti where idUnita = 3</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_Stazioni
+								<ul>
+									<li>Cadastro das Estações de cada Trecho da linha.</li>
+									<li>Exemplo: (todos as estações do trecho de código 91)</li>
+									<li class="select">select top 25 * from A_Stazioni where idTratto = 91</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="Workplace">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Cadastros das estações de trabalho (Módulos)</H2>
+						<ol>
+							<li>A_StandardWorkplace
+								<ul>
+									<li>Cadastro das Estações de trabalho (Módulos). UMAP, DELIBERA, SPED, UMAP de backup(CK3), 
+									APERTADEIRA, XLM, CHAMADA MATERIAL, etc. Cada um desses módulos tem sua particularidade.</li>
+									<li>Exemplo: (procura por uma estação de código ‘WP_SPL325YH0_BCR_SPL’)</li>
+									<li class="select">select top 25 * from A_StandardWorkplace where Workplace like 'WP_SPL325YH0_BCR_SPL'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_WorkplaceGroup
+								<ul>
+									<li>Cadastro dos tipos dos Módulos.</li>
+									<li>Exemplo: (11 módulos diferentes)</li>
+									<li class="select">select top 25 * from A_WorkplaceGroup</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_Device
+								<ul>
+									<li>Cadastro dos devices de uma estação de trabalho.</li>
+									<li>Exemplo: (procura por todos os Devices contidos na estação de código 945)</li>
+									<li class="select">select top 25 * from A_Device where idwp = 945</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_Workoperation
+								<ul>
+									<li>Cadastro das operações que ficam incluso na estação de trabalho. Essas operações têm suas especificidades de acordo com cada módulo. 
+									Uma operação pode pertencer a mais de uma estação e uma estação pode ter várias operações.</li>
+									<li>Exemplo: (procura por uma operação de código 'TRC_YHFROMUD_000')</li>
+									<li class="select">select top 25 * from A_Workoperation where Codice like 'TRC_YHFROMUD_000'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_WorkplaceItems
+								<ul>
+									<li>Tabela auxiliar entre A_StandardWorkplace e A_Workoperation. Coluna `IdWP` é o código da estação e `ItemId´ é o código da operação.</li>
+									<li>Exemplo: (procura pela estação de código 945 e pela operação de código 587)</li>
+									<li class="select">select top 25 * from A_WorkplaceItems where idwp = 945 and ItemId = 587</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="Transito">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Transito dos CIS </H2>
+						<ol>
+							<li>T_Transiti
+								<ul>
+									<li>Cadastro dos dados do CIS por estação de trabalho (Módulo). A coluna `idpunto´ corresponde ao código da tabela A_StandardWorkplace.</li>
+									<li>Exemplo: (busca pelos todos os trânsitos da estação de código 945)</li>
+									<li class="select">select top 25 * from T_Transiti where idpunto = 945</li>
+								</ul>
+							</li>
+							<br/>
+							<li>efv_cisWorkOperation
+								<ul>
+									<li>View.</li>
+									<li>Exemplo: (busca pelos todos os trânsitos da estação de código 945)</li>
+									<li class="select">select top 25 * from efv_cisWorkOperation where cis like '7740233' and WO_CODE like 'TRC_PJY56201_000'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>efv_cisWorkOperationBarcodeDetails
+								<ul>
+									<li>View.</li>
+									<li>Exemplo: (busca pelos todos os trânsitos da estação de código 945)</li>
+									<li class="select">select top 25 * from efv_cisWorkOperationBarcodeDetails where cis like '7740404' and OPERATION_CODE like 'TRC_PJY56201_000'</li>
+								</ul>
+							</li>
+							<br/>
+							<li>efv_cisWorkOperationFull
+								<ul>
+									<li>View.</li>
+									<li>Exemplo: (busca pelos todos os trânsitos da estação de código 945)</li>
+									<li class="select">select top 25 * from efv_cisWorkOperationFull where cis like '7740404' and OPERATION_CODE like 'TRC_PJY56201_000'</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="Mensagens">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Mensagens para fornecedores / MES Conector</H2>
+						<ol>
+							<li>A_DispatchApp 
+								<ul>
+									<li>Cadastro dos fornecedores (quem irá receber a mensagem).</li>
+									<li>Exemplo: (37 tipos de fornecedores diferentes)</li>
+									<li class="select">select top 25 * from A_DispatchApp</li>
+								</ul>
+							</li>
+							<br/>
+							<li>T_DispatchMsg 
+								<ul>
+									<li>Cadastros das mensagens encaminhadas para os fornecedores via XML.</li>
+									<li>Exemplo: (Busca pelo pelas mensagens pelo fornecedor de código 43)</li>
+									<li class="select">select * from T_DispatchMsg where IDDispatchApp = 43</li>
+								</ul>
+							</li>
+
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<section id="AF_Desenho">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Área física e Desenho</H2>
+						<ol>
+							<li>A_AreeFisiche 
+								<ul>
+									<li>São áreas onde serão guardadas os Desenhos(peças) que serão montadas no CIS (Carros).</li>
+									<li>Exemplo: (37 tipos de fornecedores diferentes)</li>
+									<li class="select">select top 25 * from A_AreeFisiche</li>
+								</ul>
+							</li>
+							<br/>
+							<li>A_Disegni 
+								<ul>
+									<li>Cadastros dos Desenhos(peças) que serão montadas no CIS (Carros).</li>
+									<li>Exemplo: (37 tipos de fornecedores diferentes)</li>
+									<li class="select">select top 25 * from A_Disegni</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<br/>
+			<div style="width: 100%; text-align: center;"><h1>Mip</h1></div>
+			
+			<section id="MIP">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H2>Mip cadastro de pessoas e grupos</H2>
+						<ol>
+							<li>AspNetUsers 
+								<ul>
+									<li>Cadastro dos usuários com acesso as páginas do MES.</li>
+									<li>Exemplo: (25 usuários)</li>
+									<li class="select">select top 25 * from AspNetUsers</li>
+								</ul>
+							</li>
+							<br/>
+							<li>MipAuthorizations 
+								<ul>
+									<li>Cadastros das grupos de autorizações.</li>
+									<li>Exemplo: (25 cadastros)</li>
+									<li class="select">select top 25 * from MipAuthorizations</li>
+								</ul>
+							</li>
+							<br/>
+							<li>MIPActions 
+								<ul>
+									<li>Cadastros de ações e métodos por paginas para acesso.</li>
+									<li>Exemplo: (25 cadastros)</li>
+									<li class="select">select top 25 * from MIPActions</li>
+								</ul>
+							</li>
+							<br/>
+							<li>MipAuthorizationsActions 
+								<ul>
+									<li>Ligação entre as tabelas 'MIPActions' e 'MipAuthorizations'.</li>
+									<li>Exemplo: (25 cadastros)</li>
+									<li class="select">select top 25 * from MipAuthorizationsActions</li>
+								</ul>
+							</li>
+							<br/>
+							<li>MipRolesAuthorizations 
+								<ul>
+									<li>Ligação entre as tabelas 'MipAuthorizations' e 'AspNetUserRoles'.</li>
+									<li>Exemplo: (25 cadastros)</li>
+									<li class="select">select top 25 * from MipRolesAuthorizations</li>
+								</ul>
+							</li>
+							<br/>
+							<li>AspNetUserRoles 
+								<ul>
+									<li>Ligação entre as tabelas 'MipRolesAuthorizations' e 'AspNetUsers'.</li>
+									<li>Exemplo: (25 cadastros)</li>
+									<li class="select">select top 25 * from AspNetUserRoles</li>
+								</ul>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			<br/>
+			<section id="Consultas_diversas">
+				<div style="width: 100%; text-align: center;"><h2>Consultas diversas</h2></div>
+			</section>
+			
+			
+			<section id="Consultas">
+				<div class="row">
+					<div class="col-md-12">
+						<br/>
+						<H3>Estação</H3>
+						<ol>
+							<section id="localizacao">
+								<li>Busca da localização da Workplace na fábrica (mostando Linha, trexo, PDT e suas operações)
+									<ul>
+										<li class="select">select UN.Descrizione as Unity, TR.IdTratto as Tratto_Id, TR.Codice as Tratto_Code, TR.Descrizione as Tratto_Desc, ST.IdStazione as Station_Id, ST.Codice as Station_Code, ST.Descrizione as Station_Desc, WP_G.WorkplaceGroupPK as Workplace_Id, WP_G.Code as Workplace_Code, WP_G.Description as Workplace_Desc, 
+														<br/>WP.Workplace as Workplace_Name, DeviceTp.CodTipo as Device_Type, 
+														<br/>WPDevice.Codice as Device_Code, 
+														<br/>wo.Codice as WO_Code, wo.Descrizione as WO_Desc 
+														<br/>from A_Unita UN 
+														<br/>inner join A_Tratti TR on UN.IdUnita = TR.idUnita 
+														<br/>inner join A_Stazioni ST on TR.IdTratto = ST.IdTratto full 
+														<br/>outer join A_StandardWorkplace WP on ST.IdStazione = WP.EquipmentID 
+														<br/>inner join A_WorkplaceGroup WP_G on WP.WorkplaceGroupPK = WP_G.WorkplaceGroupPK 
+														<br/>left outer join A_Device WPDevice on WP.WorkplacePK = WPDevice.IdWP 
+														<br/>left join A_DeviceType DeviceTp on WPDevice.Tipo = DeviceTp.IdTipo 
+														<br/>left join A_WorkplaceItems wi on wi.idwp = wp.WorkplacePK and wi.ItemType in ( 2, 7) and isnull(wi.deleted,0) = 0 
+														<br/>left join A_Workoperation wo on wi.ItemId = wo.IdWO where UN.IdUnita in (1,2,3,4) 
+														<br/>and WP.Workplace like '%8321_L3_04%' 
+														<br/>order by UN.IdUnita</li>
+									</ul>
+								</li>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca da de Workplace pela operação
+									<ul>
+										<li class="select">select * from A_StandardWorkplace WP 
+														<br/>left outer join A_Device WPDevice on WP.WorkplacePK = WPDevice.IdWP
+														<br/>left join A_WorkplaceItems wi on wi.idwp = wp.WorkplacePK and wi.ItemType in ( 2, 7) and isnull(wi.deleted,0) = 0
+														<br/>left join A_Workoperation wo on wi.ItemId = wo.IdWO 
+														<br/>where wo.Codice like '%TRC_CXT88A00_000%'</li>
+									</ul>
+								</li>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca uma estação, suas operações e os respectivos CDA's
+									<ul>
+										<li class="select">select top 100  a.Workplace , wo.Codice
+														<br/>,b.SqlWhere
+														<br/>,r.job, c.Descrizione 
+														<br/>,c.SqlWhere
+														<br/>FROM A_StandardWorkplace A (NOLOCK)
+														<br/>join A_WorkplaceItems wi on wi.idwp = a.WorkplacePK and wi.ItemType in ( 2, 7) and isnull(wi.deleted,0) = 0 
+														<br/>join A_Workoperation wo on wi.ItemId = wo.IdWO 
+														<br/>join A_Cda b (NOLOCK) on wo.IdCda = b.IdCda
+														<br/>left outer join A_Device WPDevice on wi.deviceID = WPDevice.id 
+														<br/>join R_DeviceJob r on r.IdDevice = WPDevice.id
+														<br/>join A_Cda c (NOLOCK) on r.IdCda = c.IdCda
+														<br/>where 
+														<br/>a.Workplace like '%8321_L3_11%'
+														<br/>order by a.Workplace,wo.Codice,r.job </li>
+									</ul>
+								</li>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca em quais estações estão aplicadas uma CDA específica
+									<ul>
+										<li class="select">select distinct
+														<br/>a.Workplace ESTACAO
+														<br/>,wo.Descrizione DESCRICAO_OPERACAO
+														<br/>, wo.Codice CODIGO_OPERACAO
+														<br/>, b.Descrizione NOME_CDA_ESTACAO
+														<br/>,b.SqlWhere CDA_ESTACAO
+														<br/>,r.job CICLO
+														<br/>, c.Descrizione NOME_CDA_CICLO
+														<br/>,c.SqlWhere CDA_CICLO                         
+														<br/>FROM A_StandardWorkplace A (NOLOCK)
+														<br/>join A_WorkplaceItems wi (NOLOCK) on wi.idwp = a.WorkplacePK and wi.ItemType <> 5 -- in ( 2, 7) and isnull(wi.deleted,0) = 0 
+														<br/>join A_Workoperation wo (NOLOCK) on wi.ItemId = wo.IdWO 
+														<br/>join A_Cda b (NOLOCK) on wo.IdCda = b.IdCda
+														<br/>left outer join A_Device WPDevice (NOLOCK) on wi.deviceID = WPDevice.id 
+														<br/>left outer join R_DeviceJob r (NOLOCK) on r.IdDevice = WPDevice.id
+														<br/>left outer join A_Cda c (NOLOCK) on r.IdCda = c.IdCda
+														<br/>where 
+														<br/>b.Descrizione like 'D3 - 0066 - LINHA 3' or c.Descrizione like 'D3 - 0066 - LINHA 3'
+														<br/>order by a.Workplace,wo.Codice,r.job  </li>
+									</ul>
+								</li>
+							</section>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca em uma delibera as operação q não estão em outras
+									<ul>
+										<li class="select">select distinct b.codice from A_WorkplaceItems a (nolock)
+														<br/>inner join A_Workoperation b (nolock) on ItemId = IdWO 
+														<br/>join A_StandardWorkplace c (nolock) on a.idwp = c.WorkplacePK
+														<br/>where Workplace in ( 'WP_M3E28_QG', 'WP_M1F14_QG') 
+														<br/>and  Codice not in (
+														<br/>	select distinct b.codice from A_WorkplaceItems a (nolock)
+														<br/>	inner join A_Workoperation b (nolock) on ItemId = IdWO 
+														<br/>	join A_StandardWorkplace c (nolock) on a.idwp = c.WorkplacePK
+														<br/>	where Workplace in ( 'WP_REPAR_QG') )</li>
+									</ul>
+								</li>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca de estação de torque e as CDAs dos ciclos pela operação
+									<ul>
+										<li class="select">select distinct
+														<br/>a.Workplace ESTACAO
+														<br/>, WPDevice.Codice OPERACAO_SRFCA , wo.Codice CODIGO_OPERACAO
+														<br/>, d1.esitoCda
+														<br/>, b.Descrizione NOME_CDA_ESTACAO 
+														<br/>,r.job CICLO , d2.esitoCda
+														<br/>, c.Descrizione NOME_CDA_CICLO 
+														<br/>FROM A_StandardWorkplace A (NOLOCK)
+														<br/>join A_WorkplaceItems wi (NOLOCK) on wi.idwp = a.WorkplacePK and wi.ItemType in ( 2, 7) and isnull(wi.deleted,0) = 0 
+														<br/>join A_Workoperation wo (NOLOCK) on wi.ItemId = wo.IdWO 
+														<br/>join A_Cda b (NOLOCK) on wo.IdCda = b.IdCda
+														<br/>join D_Esiti_CDA (NOLOCK) d1 on d1.idCda = b.IdCda
+														<br/>left outer join A_Device WPDevice (NOLOCK) on wi.deviceID = WPDevice.id 
+														<br/>join R_DeviceJob r (NOLOCK) on r.IdDevice = WPDevice.id
+														<br/>join A_Cda c (NOLOCK) on r.IdCda = c.IdCda
+														<br/>join D_Esiti_CDA (NOLOCK) d2 on d2.idCda = c.IdCda
+														<br/>where (a.Workplace like '%MONT_10107%' or wo.Codice like '%MONT_10107%')
+														<br/>and d1.cis like '7780074' and d2.cis like '7780074'
+														<br/>ORDER BY a.Workplace,wo.Codice,r.job </li>
+									</ul>
+								</li>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca pelos Desenhos e área física de um CIS
+									<ul>
+										<li class="select">select top 250 * from [UteDigitale].[dbo].[T_CaratteristicheDisCis] (NOLOCK) C
+														<br/>inner join [UteDigitale].[dbo].[A_Disegni] (NOLOCK) D on D.IdDisegno = c.idDisegno
+														<br/>inner join [UteDigitale].[dbo].[A_AreeFisiche] (NOLOCK) AF on AF.IdAreaFisica = c.idAreaFisica
+														<br/>where cis like '7740233'</li>
+									</ul>
+								</li>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca operações Blocante (G) que não foram executadas por um CIS
+									<ul>
+										<li class="select">Select * from (
+													<br/>	select 
+													<br/>			wo.codice WO_CODE,
+													<br/>			case 
+													<br/>				when cdablocco.esitoCda is not null then    
+													<br/>						case 
+													<br/>						when  wo.statoRifBlocco is not null and wo.dataOraBlocco is not null and lastPoint.cis is not null and lastPoint.DataOraTransito <  wo.dataOraBlocco  then NULL
+													<br/>						else  wo.statoBlocco
+													<br/>						end
+													<br/>				else null
+													<br/>			end 'CAP_BLOCK_STATUS',
+													<br/>			case   
+													<br/>				when t.Esito is null then 'NOEXEC'
+													<br/>			else
+													<br/>				case wo.WO_Idtipologia
+													<br/>				when 1 then   --TRABY
+													<br/>					case when t.Esito is null then 'NOEXEC' when  t.Esito=0 then 'OK' else 'KO' end
+													<br/>				when 2 THEN      --TOOL
+													<br/>					case atrnE.esitorisolutivo
+													<br/>						when 1 then 'KO'
+													<br/>						else 'OK'
+													<br/>					end
+													<br/>				when 3 then   --CERT
+													<br/>					case when t.Esito is null then 'NOEXEC' when  t.Esito=1 then 'OK' else 'KO' end
+													<br/>				end
+													<br/>			end            as  'WO_STATUS'
+													<br/>		from 
+													<br/>		t_cis (nolock) tc
+													<br/>		inner join A_Workoperation (nolock) wo    on   isnull(wo.deleted,0) = 0 
+													<br/>		inner join D_Esiti_CDA (nolock) esiti                     -- filtro le operazioni per CDA
+													<br/>				on (tc.cis = esiti.CIS and esiti.IdCda = wo.IdCda and esiti.esitoCda = 1) 
+													<br/>		left outer join D_Esiti_CDA (nolock) cdablocco  on (tc.cis = cdablocco.CIS and cdablocco.IdCda = isnull(wo.cdaBlocco,0) and cdablocco.esitoCda = 1) 
+													<br/>		left  join t_workoperation (nolock) two            on two.idWO = wo.IdWO and two.idcis = tc.IdCis
+													<br/>		left  join T_Transiti (nolock) t    on two.idtransito = t.IdTransito 
+													<br/>		left  join ATRN_EsitiOP atrnE on atrnE.IdEsito = t.Esito and WO_Idtipologia = 2
+													<br/>		LEFT JOIN V_LastCisTraguardoPoint lastPoint     on lastPoint.CIS = tc.cis and lastPoint.Traguardo = wo.statoRifBlocco 
+													<br/>		LEFT JOIN V_LastCisTraguardoPoint lastPointAttivaz     on lastPointAttivaz.CIS = tc.cis and lastPointAttivaz.Traguardo = wo.StatoTimeStamp 
+													<br/>		where  tc.cis like '7904558'
+													<br/>	) as tb
+													<br/>where cap_block_status = 'G' and WO_STATUS <> 'OK' </li>
+									</ul>
+								</li>
+							</section>
+							
+							<section id="localizacao">
+								<li>Busca por alteração do download em uma estação
+									<ul>
+										<li class="select">select * from 
+														<br/>(select 
+														<br/>	   pref.value('(text())[1]', 'varchar(max)') as RoleName, a.*
+														<br/>from 
+														<br/>	   A_export a CROSS APPLY
+														<br/>	   contentversion.nodes('/root/Operazioni/element/Codice') AS Roles(pref)
+														<br/>)  as Result
+														<br/>where RoleName like '%TRC_A1AIRBAG_000%'
+														<br/>	and datedownload between cast('2020-01-01' as date) and cast('2020-01-31' as date)
+														<br/>order by datedownload</li>
+									</ul>
+								</li>
+							</section>
+							<br/>
+							<section id="localizacao">
+								<li>Busca dos usuários MIP que tem permissão de acesso / CRUD de uma determinada página e seus Métodos/ Actions
+									<ul>
+										<li class="select">select * from (
+														<br/>	select distinct UPPER(f.UserName) as Matícula, UPPER(f.FirstName) as Nome, UPPER(f.LastName) as Sobrenome, UPPER(isnull(f.Email,'')) as email from MIPActions a
+														<br/>	join MipAuthorizationsActions b	on b.ActionId = a.id
+														<br/>	--join MipAuthorizations c		on c.id = b.AuthorizationId
+														<br/>	join MipRolesAuthorizations d	on d.AuthorizationId = b.AuthorizationId
+														<br/>	join AspNetUserRoles e			on e.RoleId = d.RoleId
+														<br/>	join AspNetUsers f			on f.Id = e.UserId
+														<br/>	where a.controller='Producibility' and a.action in ('InsertAreeLogiche','InsertAreeLogicheSecondarie','updateDataAreeLogiche','updateDataAreeLogicheSecondarie',
+														<br/>	'deleteDataAreeLogiche','deleteDataAreeLogicheSecondarie','UpdateSincom'
+														<br/>	)
+														<br/>	union 
+														<br/>	select UPPER(UserName) as Matícula, UPPER(FirstName) as Nome, UPPER(LastName) as Sobrenome, UPPER(isnull(Email,'')) as email  from AspNetUsers where id in (
+														<br/>		select userid from AspNetUserRoles where roleid in (
+														<br/>			select roleid from MipRolesAuthorizations where AuthorizationId in ('1')
+														<br/>		)
+														<br/>	)
+														<br/>) as tb
+														<br/>order by 2</li>
+									</ul>
+								</li>
+							</section>
+						</ol>
+					</div>
+				</div>
+			</section>
+			
+			
+			
+		<br/>
+		<br/>
+		</div>
+	</body>
+</html>
